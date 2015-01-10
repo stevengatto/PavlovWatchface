@@ -30,7 +30,7 @@ public class FuzzyTime extends Time {
     @Override
     public void setToNow() {
         int mean = context.getSharedPreferences("FuzzyTime", Context.MODE_PRIVATE)
-                .getInt("key_mean", 5);
+                .getInt("key_mean", 8);
         int stdev = context.getSharedPreferences("FuzzyTime", Context.MODE_PRIVATE)
                 .getInt("key_stdev", 2);
         RandomOffsetUtil.setNormalDistribution(mean, stdev);
@@ -59,7 +59,7 @@ public class FuzzyTime extends Time {
         if (atMinute != lastUpdateTime)
         {
             lastUpdateTime = atMinute;
-            currentOffset = Math.abs((int) RandomOffsetUtil.sampleNormalDistribution());
+            currentOffset = (int) RandomOffsetUtil.sampleNormalDistribution();
         }
     }
 
@@ -89,14 +89,10 @@ public class FuzzyTime extends Time {
         }
 
         public static double sampleNormalDistribution() {
-            if (distribution.getMean() == 0d) {
-                return 0d;
-            }
-            else {
-                double sample;
-                while ((sample = distribution.sample()) > (2 * distribution.getMean())) ;
-                return  Math.abs(sample);
-            }
+            double sample = distribution.sample();
+            sample = Math.max(0d, sample);
+            sample = Math.min(sample, 2 * distribution.getMean());
+            return sample;
         }
 
     }

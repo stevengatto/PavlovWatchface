@@ -16,7 +16,7 @@ public class FuzzyTime extends Time {
 
     private int lastUpdateTime;
     private int currentOffset;
-    Context context;
+    private static Context context;
 
     public FuzzyTime(Context context) {
         super();
@@ -83,7 +83,8 @@ public class FuzzyTime extends Time {
                     }
                 }
             };
-
+            SharedPreferences sharedPreferences = context.getSharedPreferences("FuzzyTime",Context.MODE_PRIVATE);
+            sharedPreferences.registerOnSharedPreferenceChangeListener(listener);
 
         }
 

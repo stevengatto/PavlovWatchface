@@ -1,0 +1,10 @@
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/classes/debug
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-e90ffa1126e946cac2e8de2e2a1fc29be0367c6c.jar
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-2f842544b158e09834435f07a10b4a1a79dd5a3f.jar
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-a17a13470c2ab4891c0446c9be6371a3b9541290.jar
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-560023adea76392133390af763e7fb16d04d77fa.jar
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-58b4a5b5e844015e1616f46c5c42fd06f0366816.jar
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-0ae80f9f4e482e107123f332e3b06a18c561b575.jar
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-ada8b149aa786b81cc6c9ff8b8574d2a451836e4.jar
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-e27336a389aab1ae2150255f158e06b62e7074d4.jar
+/Users/steven/Development/Android/Wear/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-0e1ebad8d4fd3da0059253e86e9969c271109f2c.jar

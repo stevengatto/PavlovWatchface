@@ -1,20 +1,9 @@
 package com.example.android.wearable.watchface;
 
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
-import android.support.wearable.watchface.WatchFaceService;
 import android.text.format.Time;
 import android.util.Log;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.app.NotificationCompat.WearableExtender;
-
-import com.google.android.gms.tagmanager.PreviewActivity;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 
@@ -40,7 +29,11 @@ public class FuzzyTime extends Time {
 
     @Override
     public void setToNow() {
-        RandomOffsetUtil.setNormalDistribution(5, 2);
+        int mean = context.getSharedPreferences("FuzzyTime", Context.MODE_PRIVATE)
+                .getInt("key_mean", 5);
+        int stdev = context.getSharedPreferences("FuzzyTime", Context.MODE_PRIVATE)
+                .getInt("key_stdev", 2);
+        RandomOffsetUtil.setNormalDistribution(mean, stdev);
         set(System.currentTimeMillis() + getOffset());
     }
 
@@ -90,41 +83,20 @@ public class FuzzyTime extends Time {
                     }
                 }
             };
+
+
         }
 
         public static double sampleNormalDistribution() {
-            return distribution.sample();
-        }
-
-    }
-
-
-    /** Handler to update the time once a second in interactive mode. */
-    final Handler mUpdateTimeHandler = new Handler() {
-        @Override
-        public void handleMessage(Message message) {
-            switch (message.what) {
-                case MSG_NEW_LOC:
-
-
-
-                    //// need to register
-
-
-
-                    Log.v(TAG, "new location");
-                    if (shouldAsk()) {
-
-                    }
-                    break;
+            if (distribution.getMean() == 0d) {
+                return 0d;
+            }
+            else {
+                double sample;
+                while ((sample = distribution.sample()) > (2 * distribution.getMean())) ;
+                return  Math.abs(sample);
             }
         }
-    };
 
-
-    public boolean shouldAsk(){
-
-        return true;
     }
-
 }

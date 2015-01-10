@@ -1,22 +1,33 @@
 package com.example.android.wearable.watchface;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 
 /**
  * Created by Dharam on 1/10/2015.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+        addPreferencesFromResource(R.xml.preferences);
         setAlarm();
+
+        SharedPreferences prefs = getSharedPreferences("AheadOfTime", MODE_PRIVATE);
+        prefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                getResources().getString(R.string.key_preference_mean); // Key for mean
+                getResources().getString(R.string.key_preference_stdev); // Key for stdev
+            }
+        });
     }
 
     private void setAlarm() {

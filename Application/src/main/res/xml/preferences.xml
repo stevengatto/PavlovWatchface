@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:title="Watch Settings">
+
+        <ListPreference
+            android:key="@string/key_preference_mean"
+            android:title="Average clock offset"
+            android:summary="Normal distribution mean (in minutes)"
+            android:dialogTitle="Choose a mean"
+            android:entries="@array/preferences_mean_entry"
+            android:entryValues="@array/preferences_mean_value"
+            android:defaultValue="5"/>
+
+        <ListPreference
+            android:key="@string/key_preference_stdev"
+            android:title="Clock offset variance"
+            android:summary="Normal distribution standard deviation (in minutes)"
+            android:dialogTitle="Choose a standard deviation"
+            android:entries="@array/preferences_stdev_entry"
+            android:entryValues="@array/preferences_stdev_value"
+            android:defaultValue="5"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

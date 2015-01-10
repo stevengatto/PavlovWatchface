@@ -28,7 +28,6 @@ public class FuzzyTime extends Time {
     public FuzzyTime(Context context) {
         super();
         this.context = context;
-        askIfLate();
     }
 
     @Override
@@ -52,7 +51,7 @@ public class FuzzyTime extends Time {
 
                     Log.v(TAG, "new location");
                     if (shouldAsk()) {
-                        askIfLate();
+
                     }
                     break;
             }
@@ -63,33 +62,6 @@ public class FuzzyTime extends Time {
     public boolean shouldAsk(){
 
         return true;
-    }
-
-    public void askIfLate(){
-
-        int notificationId = 001;
-        // Build intent for notification content
-        Intent viewIntent = new Intent(context,PreviewActivity.class);
-        //viewIntent.putExtra(EXTRA_EVENT_ID, eventId);
-        PendingIntent viewPendingIntent =
-                PendingIntent.getActivity(context, 0, viewIntent, 0);
-
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.common_signin_btn_icon_dark)
-                        .setContentTitle("Were you late?")
-                        .setContentText("Bottom")
-                        .setContentIntent(viewPendingIntent);
-
-        // Get an instance of the NotificationManager service
-        NotificationManagerCompat notificationManager =
-                NotificationManagerCompat.from(context);
-
-// Build the notification and issues it with notification manager.
-        notificationManager.notify(notificationId, notificationBuilder.build());
-
-
-
     }
 
 }

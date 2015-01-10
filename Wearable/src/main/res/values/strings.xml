@@ -15,11 +15,11 @@
 -->
 <resources>
     <string name="app_name">WatchFace</string>
-    <string name="tilt_name">Sample Tilt</string>
-    <string name="analog_name">Sample Analog</string>
-    <string name="sweep_name">Sample Sweep</string>
+    <string name="tilt_name">AOT - Tilt</string>
+    <string name="analog_name">AOT - Analog</string>
+    <string name="sweep_name">AOT - Sweep</string>
     <string name="card_bounds_name">Sample Card Bounds</string>
-    <string name="digital_name">Sample Digital</string>
+    <string name="digital_name">AOT - Digital</string>
     <string name="digital_background_color">Background color</string>
     <string name="digital_config_name">Digital watch face configuration</string>
     <string name="digital_am">AM</string>

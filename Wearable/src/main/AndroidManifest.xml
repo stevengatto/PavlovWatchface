@@ -103,7 +103,7 @@
                 <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
             </intent-filter>
         </service>
-
+<!--
         <service
                 android:name=".CardBoundsWatchFaceService"
                 android:label="@string/card_bounds_name"
@@ -127,7 +127,7 @@
                 <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
             </intent-filter>
         </service>
-
+-->
         <service
                 android:name=".DigitalWatchFaceService"
                 android:label="@string/digital_name"

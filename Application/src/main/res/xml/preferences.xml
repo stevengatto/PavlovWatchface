@@ -23,7 +23,7 @@
             android:dialogTitle="Choose a standard deviation"
             android:entries="@array/preferences_stdev_entry"
             android:entryValues="@array/preferences_stdev_value"
-            android:defaultValue="5"/>
+            android:defaultValue="2"/>
 
         <Preference
             android:key="@string/key_preference_button"

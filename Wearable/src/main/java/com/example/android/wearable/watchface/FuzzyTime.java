@@ -15,14 +15,17 @@ import android.support.v4.app.NotificationCompat.WearableExtender;
 
 import com.google.android.gms.tagmanager.PreviewActivity;
 
+import org.apache.commons.math3.distribution.NormalDistribution;
+
 /**
  * Created by steven on 1/9/15.
  */
 public class FuzzyTime extends Time {
-
     public static final String TAG = "FuzzyTime";
     static final int MSG_NEW_LOC = 1912391;
 
+    private int lastUpdateTime;
+    private int currentOffset;
     Context context;
 
     public FuzzyTime(Context context) {
@@ -30,9 +33,55 @@ public class FuzzyTime extends Time {
         this.context = context;
     }
 
+    public FuzzyTime() {
+        super();
+    }
+
     @Override
     public void setToNow() {
-        set(System.currentTimeMillis() + 1000*60*5);
+        RandomOffsetUtil.setNormalDistribution(5, 2);
+        set(System.currentTimeMillis() + getOffset());
+    }
+
+    /**
+     * offset getter
+     * @return current offset in ms
+     */
+    public int getOffset() {
+        return 1000 * 60 * currentOffset;
+    }
+
+    public int getOffsetInMinutes() {
+        return getOffset()/(1000 * 60);
+    }
+
+    /**
+     * updates the offset with a positive value sampled from the distribution
+     *
+     * @param atMinute minute that we are updating offset, so we don't update the offset
+     *                 multiple calls in calls from the same minute
+     */
+    public void updateOffset(int atMinute) {
+        if (atMinute != lastUpdateTime)
+        {
+            lastUpdateTime = atMinute;
+            currentOffset = Math.abs((int) RandomOffsetUtil.sampleNormalDistribution());
+        }
+    }
+
+
+    private static class RandomOffsetUtil {
+
+        private static NormalDistribution distribution;
+
+        public static void setNormalDistribution(double mean, double stddev) {
+            distribution = new NormalDistribution(mean, stddev);
+        }
+
+        public static double sampleNormalDistribution() {
+            return distribution.sample();
+        }
+
     }
 
 

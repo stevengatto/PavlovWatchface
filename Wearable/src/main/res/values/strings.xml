@@ -18,6 +18,8 @@
     <string name="tilt_name">AOT - Tilt</string>
     <string name="analog_name">AOT - Analog</string>
     <string name="sweep_name">AOT - Sweep</string>
+    <string name="analog_name_updated">AOT - Analog Updated</string>
+
     <string name="card_bounds_name">Sample Card Bounds</string>
     <string name="digital_name">AOT - Digital</string>
     <string name="digital_background_color">Background color</string>

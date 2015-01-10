@@ -157,7 +157,7 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
             mSmallTickPaint.setStrokeWidth(2.f);
             mSmallTickPaint.setAntiAlias(true);
 
-            mTime = new FuzzyTime();
+            mTime = new FuzzyTime(getBaseContext());
         }
 
         @Override

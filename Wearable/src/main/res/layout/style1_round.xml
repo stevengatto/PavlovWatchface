@@ -1,0 +1,66 @@
+<LinearLayout
+    android:id="@+id/layout3"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="edu.neu.android.edu.neu.android.mhealth.uematest.MainActivity">
+
+    <Button
+        android:id="@+id/answer1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/custom_button"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:text="Answer1"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:maxLines="4"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="Question"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <Button
+        android:id="@+id/answer2"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/custom_button"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:text="Answer2"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"/>
+
+</LinearLayout>

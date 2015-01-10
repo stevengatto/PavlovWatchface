@@ -137,13 +137,12 @@ public class MinuteService extends Service implements
                         for (int i = 0; i < distances.size(); i++) {
                             if (distances.get(i) > 30) {
                                 isAtNewLocation = false;
-                                editor.putBoolean("KEY_IS_TRAVELLING", true);
+                                editor.putBoolean("KEY_IS_TRAVELLING", false);
                                 editor.commit();
                             }
                         }
                     }
-                    //TODO Change to isAtNewLocation
-                    if (true) {
+                    if (isAtNewLocation) {
                         new StartWearableActivityTask().execute("NewLocation");
                     }
                 }

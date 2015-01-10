@@ -142,8 +142,11 @@ public class MinuteService extends Service implements
                             }
                         }
                     }
-                    if (isAtNewLocation) {
+                    long lastPromptTime = sharedPreferences.getLong("KEY_LAST_PROMPT", System.currentTimeMillis());
+                    long differenceTime = System.currentTimeMillis() - lastPromptTime;
+                    if (isAtNewLocation && (differenceTime > 15 * 60 * 1000)) {
                         new StartWearableActivityTask().execute("NewLocation");
+                        editor.putLong("KEY_LAST_PROMPT", System.currentTimeMillis());
                     }
                 }
             }

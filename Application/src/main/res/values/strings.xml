@@ -76,7 +76,6 @@
     </string-array>
 
     <string-array name="preferences_stdev_entry">
-        <item>0 minutes</item>
         <item>1 minutes</item>
         <item>2 minutes</item>
         <item>3 minutes</item>
@@ -85,7 +84,6 @@
     </string-array>
 
     <string-array name="preferences_stdev_value">
-        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>

@@ -1,6 +1,7 @@
 package com.example.android.wearable.watchface;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -42,6 +43,17 @@ public class ListenerService extends WearableListenerService {
                 Intent promptIntent = new Intent(getApplicationContext(), PromptActivity.class);
                 promptIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(promptIntent);
+            }
+            else if (message.startsWith("MEAN")){
+                String[] messageHalves = message.split(",");
+                String[] mean = messageHalves[0].split(":");
+                String[] stdev = messageHalves[1].split(":");
+                Log.d(TAG, "Got message for mean and stdev");
+                SharedPreferences prefs = getSharedPreferences("FuzzyTime", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("key_mean", Integer.valueOf(mean[1]));
+                editor.putInt("key_stdev", Integer.valueOf(stdev[1]));
+                editor.apply();
             }
         }
     }

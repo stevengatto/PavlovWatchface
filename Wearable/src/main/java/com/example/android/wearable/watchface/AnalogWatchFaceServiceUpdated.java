@@ -43,8 +43,6 @@ import java.util.concurrent.TimeUnit;
  * Sample analog watch face with a ticking second hand. In ambient mode, the second hand isn't
  * shown. On devices with low-bit ambient mode, the hands are drawn without anti-aliasing in ambient
  * mode. The watch face is drawn with less contrast in mute mode.
- *
- * {@link SweepWatchFaceService} is similar but has a sweep second hand.
  */
 public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
     private static final String TAG = "AnalogWatchFaceService";
@@ -226,7 +224,7 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
         @Override
         public void onDraw(Canvas canvas, Rect bounds) {
 //            Log.d(TAG, "Redraw layout");
-            updateOffsetEveryInterval(mTime.minute, 15);
+            updateOffsetEveryInterval(mTime.minute, 2);
 
             mTime.setToNow();
 

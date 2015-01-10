@@ -3,6 +3,7 @@ package com.example.android.wearable.watchface;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -75,7 +76,20 @@ public class FuzzyTime extends Time {
         private static NormalDistribution distribution;
 
         public static void setNormalDistribution(double mean, double stddev) {
+
+            Log.d(TAG, "Mean is now " + mean + " and stdev is now " + stddev);
             distribution = new NormalDistribution(mean, stddev);
+
+            SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                    if (sharedPreferences.contains("key_mean") && sharedPreferences.contains("key_stdev")) {
+                        Log.d(TAG, "Shared preferences have been updated");
+                        setNormalDistribution(sharedPreferences.getInt("key_mean", 5),
+                                sharedPreferences.getInt("key_stdev", 2));
+                    }
+                }
+            };
         }
 
         public static double sampleNormalDistribution() {

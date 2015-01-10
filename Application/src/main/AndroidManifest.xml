@@ -14,60 +14,74 @@
      limitations under the License.
 -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.example.android.wearable.watchface" >
+<manifest package="com.example.android.wearable.watchface"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-sdk android:minSdkVersion="18"
-              android:targetSdkVersion="21" />
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="21"/>
 
     <!-- Permissions required by the wearable app -->
-    <uses-permission android:name="com.google.android.permission.PROVIDE_BACKGROUND" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="com.google.android.permission.PROVIDE_BACKGROUND"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
 
     <!-- All intent-filters for config actions must include the categories
         com.google.android.wearable.watchface.category.COMPANION_CONFIGURATION and
         android.intent.category.DEFAULT. -->
     <application
-            android:allowBackup="true"
-            android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" >
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
 
         <activity
-                android:name=".AnalogAndCardBoundsWatchFaceConfigActivity"
-                android:label="@string/app_name">
+            android:name=".AnalogAndCardBoundsWatchFaceConfigActivity"
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="com.example.android.wearable.watchface.CONFIG_ANALOG" />
-                <action android:name="com.example.android.wearable.watchface.CONFIG_CARD_BOUNDS" />
-                <category android:name="com.google.android.wearable.watchface.category.COMPANION_CONFIGURATION" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.example.android.wearable.watchface.CONFIG_ANALOG"/>
+                <action android:name="com.example.android.wearable.watchface.CONFIG_CARD_BOUNDS"/>
+
+                <category android:name="com.google.android.wearable.watchface.category.COMPANION_CONFIGURATION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <activity
-                android:name=".DigitalWatchFaceCompanionConfigActivity"
-                android:label="@string/app_name">
+            android:name=".DigitalWatchFaceCompanionConfigActivity"
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="com.example.android.wearable.watchface.CONFIG_DIGITAL" />
-                <category android:name="com.google.android.wearable.watchface.category.COMPANION_CONFIGURATION" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.example.android.wearable.watchface.CONFIG_DIGITAL"/>
+
+                <category android:name="com.google.android.wearable.watchface.category.COMPANION_CONFIGURATION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <activity
-                android:name=".TiltWatchFaceConfigActivity"
-                android:label="@string/app_name">
+            android:name=".TiltWatchFaceConfigActivity"
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="com.example.android.wearable.watchface.CONFIG_TILT" />
-                <category android:name="com.google.android.wearable.watchface.category.COMPANION_CONFIGURATION" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.example.android.wearable.watchface.CONFIG_TILT"/>
+
+                <category android:name="com.google.android.wearable.watchface.category.COMPANION_CONFIGURATION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version" />
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
 
     </application>
 

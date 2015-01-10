@@ -68,6 +68,7 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
         Paint mMinutePaint;
         Paint mSecondPaint;
         Paint mTickPaint;
+        Paint mSmallTickPaint;
         boolean mMute;
         FuzzyTime mTime;
 
@@ -80,6 +81,7 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
                         if (Log.isLoggable(TAG, Log.VERBOSE)) {
                             Log.v(TAG, "updating time");
                         }
+//                        Log.d(TAG, "updating time");
                         invalidate();
                         if (shouldTimerBeRunning()) {
                             long timeMs = System.currentTimeMillis() + 30000;
@@ -147,8 +149,13 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
 
             mTickPaint = new Paint();
             mTickPaint.setARGB(100, 255, 255, 255);
-            mTickPaint.setStrokeWidth(2.f);
+            mTickPaint.setStrokeWidth(5.f);
             mTickPaint.setAntiAlias(true);
+
+            mSmallTickPaint = new Paint();
+            mSmallTickPaint.setARGB(100, 255, 255, 255);
+            mSmallTickPaint.setStrokeWidth(2.f);
+            mSmallTickPaint.setAntiAlias(true);
 
             mTime = new FuzzyTime();
         }
@@ -212,6 +219,7 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
 
         @Override
         public void onDraw(Canvas canvas, Rect bounds) {
+            Log.d(TAG, "Redraw layout");
             mTime.setToNow();
 
             int width = bounds.width();
@@ -232,8 +240,8 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
             float centerX = width / 2f;
             float centerY = height / 2f;
 
-            // Draw the ticks.
-            float innerTickRadius = centerX - 10;
+            // Draw the 5 minute ticks.
+            float innerTickRadius = centerX - 15;
             float outerTickRadius = centerX;
             for (int tickIndex = 0; tickIndex < 12; tickIndex++) {
                 float tickRot = (float) (tickIndex * Math.PI * 2 / 12);
@@ -243,6 +251,21 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
                 float outerY = (float) -Math.cos(tickRot) * outerTickRadius;
                 canvas.drawLine(centerX + innerX, centerY + innerY,
                         centerX + outerX, centerY + outerY, mTickPaint);
+            }
+
+            // Draw the 1 minute ticks.
+            float innerSmallTickRadius = centerX - 10;
+            float outerSmallTickRadius = centerX;
+            for (int tickIndex = 0; tickIndex < 60; tickIndex++) {
+                if (tickIndex % 5 != 0) {
+                    float tickRot = (float) (tickIndex * Math.PI * 2 / 60);
+                    float innerX = (float) Math.sin(tickRot) * innerSmallTickRadius;
+                    float innerY = (float) -Math.cos(tickRot) * innerSmallTickRadius;
+                    float outerX = (float) Math.sin(tickRot) * outerSmallTickRadius;
+                    float outerY = (float) -Math.cos(tickRot) * outerSmallTickRadius;
+                    canvas.drawLine(centerX + innerX, centerY + innerY,
+                            centerX + outerX, centerY + outerY, mSmallTickPaint);
+                }
             }
 
             float secRot = mTime.second / 30f * (float) Math.PI;

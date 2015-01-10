@@ -1,13 +1,9 @@
 package com.example.android.wearable.watchface;
 
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tagmanager.PreviewActivity;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
@@ -43,10 +39,12 @@ public class ListenerService extends WearableListenerService {
             String message = new String(messageEvent.getData());
             if (message.equals("NewLocation")) {
                 Log.d(TAG, "Got message for New Location");
+                Intent promptIntent = new Intent(getApplicationContext(), PromptActivity.class);
+                promptIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(promptIntent);
             }
         }
     }
-
 
 
     @Override

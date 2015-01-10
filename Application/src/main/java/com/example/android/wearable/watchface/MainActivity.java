@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 
@@ -49,13 +50,23 @@ public class MainActivity extends PreferenceActivity implements
             mGoogleApiClient.connect();
         }
 
-        SharedPreferences prefs = getSharedPreferences("AheadOfTime", MODE_PRIVATE);
+        final SharedPreferences prefs = getSharedPreferences("AheadOfTime", MODE_PRIVATE);
         prefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                getResources().getString(R.string.key_preference_mean); // Key for mean
-                getResources().getString(R.string.key_preference_stdev); // Key for stdev
-                new StartWearableActivityTask().execute("Send Message Here");
+                String keyMean = getResources().getString(R.string.key_preference_mean);
+                String keyStdev= getResources().getString(R.string.key_preference_stdev);
+                new StartWearableActivityTask().execute("MEAN:" + prefs.getString(keyMean, "5")
+                        + ",STDEV:" + prefs.getString(keyStdev, "2"));
+            }
+        });
+
+        Preference button = findPreference(getResources().getString(R.string.key_preference_button));
+        button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference arg0) {
+                new StartWearableActivityTask().execute("NewLocation");
+                return true;
             }
         });
     }

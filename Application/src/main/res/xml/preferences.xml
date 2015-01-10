@@ -25,6 +25,12 @@
             android:entryValues="@array/preferences_stdev_value"
             android:defaultValue="5"/>
 
+        <Preference
+            android:key="@string/key_preference_button"
+            android:title="Test location notification"
+            android:summary="Send a mock notification as if arrival has been detected"/>
+
+
     </PreferenceCategory>
 
 </PreferenceScreen>

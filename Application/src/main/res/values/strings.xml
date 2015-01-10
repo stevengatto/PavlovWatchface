@@ -45,6 +45,7 @@
 
     <string name="key_preference_mean">key preference mean</string>
     <string name="key_preference_stdev">key preference stdev</string>
+    <string name="key_preference_button">key preference button</string>
 
     <string-array name="preferences_mean_entry">
         <item>0 minutes</item>

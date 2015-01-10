@@ -105,21 +105,21 @@ public class PromptActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         isQuestionAnswered = true;
         int maxMean = sharedPreferences.getInt("KEY_MAX_MEAN", 10);
-        int userValue = sharedPreferences.getInt("KEY_MEAN_VALUE", (maxMean / 2));
+        int userValue = sharedPreferences.getInt("key_mean", (maxMean / 2));
 
         if (v.getId() == answer1.getId()) {
             if (userValue > 0) {
-                editor.putInt("KEY_MEAN_VALUE", (userValue - 1));
+                editor.putInt("key_mean", (userValue - 1));
                 editor.commit();
             }
         }
         if (v.getId() == answer2.getId()) {
             if (userValue < maxMean) {
-                editor.putInt("KEY_MAX_MEAN", (userValue + 1));
+                editor.putInt("key_mean", (userValue + 1));
                 editor.commit();
             }
         }
-        System.out.println("Mean value after answer = " + sharedPreferences.getInt("KEY_MEAN_VALUE", (maxMean / 2)));
+        System.out.println("Mean value after answer = " + sharedPreferences.getInt("key_mean", (maxMean / 2)));
         this.finish();
     }
 

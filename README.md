@@ -1,35 +1,21 @@
-Android WatchFace Sample
-===================================
+Pavlov's Watchface
+==================
 
-This sample demonstrates how to create watch faces for android wear and includes a phone app
-and a wearable app. The wearable app has a variety of watch faces including analog, digital,
-opengl, calendar, etc. It also includes a watch-side configuration example. The phone app
-includes a phone-side configuration example.
+Pavlov's Watchface was developed for the 2-day Google Wearable Hackathon in Boston, MA in 
+January of 2015. This watchface allows the user to train themselves to be on time by always
+being fast, but never by the same amount. The time offset follows a normal distribution 
+around a user-defined number of minutes and adjusts itself as the user is late or on time.
+By tracking when the user has arrived at their destination, the application is able to ask
+the user if they were late or on time. If late, the mean of the distribution will be moved
+forward, training the user to be on time. If the user is consistently on time, they will be
+rewarded by getting closer and closer to the true time. 
 
-Pre-requisites
---------------
-
-- Android SDK v21
-- Android Build Tools v21.1.1
-- Android Support Repository
-
-Getting Started
----------------
-
-This sample uses the Gradle build system. To build this project, use the
-"gradlew build" command or use "Import Project" in Android Studio.
-
-Support
+Authors
 -------
 
-- Google+ Community: https://plus.google.com/communities/105153134372062985968
-- Stack Overflow: http://stackoverflow.com/questions/tagged/android
-
-If you've found an error in this sample, please file an issue:
-https://github.com/googlesamples/android-WatchFace
-
-Patches are encouraged, and may be submitted by forking this project and
-submitting a pull request through GitHub. Please see CONTRIBUTING.md for more details.
+Steven Gatto
+Joseph Cullen
+Dharam Maniar
 
 License
 -------

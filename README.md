@@ -13,9 +13,9 @@ rewarded by getting closer and closer to the true time.
 Authors
 -------
 
-Steven Gatto
-Joseph Cullen
-Dharam Maniar
+* Steven Gatto
+* Joseph Cohen
+* Dharam Maniar
 
 License
 -------

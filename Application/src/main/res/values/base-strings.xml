@@ -15,7 +15,7 @@
  limitations under the License.
 -->
 <resources>
-    <string name="app_name">WatchFace</string>
+    <string name="app_name">Pavlov\'s WatchFace</string>
     <string name="intro_message">
         <![CDATA[
         

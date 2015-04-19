@@ -1,4 +1,4 @@
-package com.example.android.wearable.watchface;
+package com.stevengatto.android.wearable.pavlov;
 
 import android.app.Service;
 import android.content.Intent;

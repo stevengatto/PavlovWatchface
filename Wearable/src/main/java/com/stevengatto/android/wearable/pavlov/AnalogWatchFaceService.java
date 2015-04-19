@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.wearable.watchface;
+package com.stevengatto.android.wearable.pavlov;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -33,6 +33,7 @@ import android.os.Message;
 import android.support.wearable.watchface.CanvasWatchFaceService;
 import android.support.wearable.watchface.WatchFaceService;
 import android.support.wearable.watchface.WatchFaceStyle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
@@ -44,7 +45,7 @@ import java.util.concurrent.TimeUnit;
  * shown. On devices with low-bit ambient mode, the hands are drawn without anti-aliasing in ambient
  * mode. The watch face is drawn with less contrast in mute mode.
  */
-public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
+public class AnalogWatchFaceService extends CanvasWatchFaceService {
     private static final String TAG = "AnalogWatchFaceService";
 
     /**
@@ -66,7 +67,6 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
         Paint mSecondPaint;
         Paint mTickPaint;
         Paint mSmallTickPaint;
-        Paint mCenterCapPaint;
         boolean mMute;
         FuzzyTime mTime;
 
@@ -117,21 +117,15 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
             }
             super.onCreate(holder);
 
-            setWatchFaceStyle(new WatchFaceStyle.Builder(AnalogWatchFaceServiceUpdated.this)
+            setWatchFaceStyle(new WatchFaceStyle.Builder(AnalogWatchFaceService.this)
                     .setCardPeekMode(WatchFaceStyle.PEEK_MODE_SHORT)
                     .setBackgroundVisibility(WatchFaceStyle.BACKGROUND_VISIBILITY_INTERRUPTIVE)
                     .setShowSystemUiTime(false)
                     .build());
 
-            Resources resources = AnalogWatchFaceServiceUpdated.this.getResources();
-            Drawable backgroundDrawable = resources.getDrawable(R.drawable.bg_updated);
+            Resources resources = AnalogWatchFaceService.this.getResources();
+            Drawable backgroundDrawable = resources.getDrawable(R.drawable.bg);
             mBackgroundBitmap = ((BitmapDrawable) backgroundDrawable).getBitmap();
-
-            mCenterCapPaint = new Paint();
-            mCenterCapPaint.setARGB(255, 255, 196, 2);
-            mCenterCapPaint.setStrokeWidth(5.f);
-            mCenterCapPaint.setAntiAlias(true);
-            mCenterCapPaint.setStrokeCap(Paint.Cap.ROUND);
 
             mHourPaint = new Paint();
             mHourPaint.setARGB(255, 200, 200, 200);
@@ -161,7 +155,7 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
             mSmallTickPaint.setStrokeWidth(2.f);
             mSmallTickPaint.setAntiAlias(true);
 
-            mTime = new FuzzyTime(getApplicationContext());
+            mTime = new FuzzyTime(getBaseContext());
         }
 
         @Override
@@ -223,9 +217,7 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
 
         @Override
         public void onDraw(Canvas canvas, Rect bounds) {
-//            Log.d(TAG, "Redraw layout");
-            updateOffsetEveryInterval(mTime.minute, 2);
-
+            Log.d(TAG, "Redraw layout");
             mTime.setToNow();
 
             int width = bounds.width();
@@ -275,12 +267,19 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
             }
 
             float secRot = mTime.second / 30f * (float) Math.PI;
-            float minRot = mTime.minute / 30f * (float) Math.PI;
-            float hrRot = ((mTime.hour + (mTime.minute / 60f)) / 6f ) * (float) Math.PI;
+            int minutes = mTime.minute;
+            float minRot = minutes / 30f * (float) Math.PI;
+            float hrRot = ((mTime.hour + (minutes / 60f)) / 6f ) * (float) Math.PI;
 
             float secLength = centerX - 20;
             float minLength = centerX - 40;
             float hrLength = centerX - 80;
+
+            if (!isInAmbientMode()) {
+                float secX = (float) Math.sin(secRot) * secLength;
+                float secY = (float) -Math.cos(secRot) * secLength;
+                canvas.drawLine(centerX, centerY, centerX + secX, centerY + secY, mSecondPaint);
+            }
 
             float minX = (float) Math.sin(minRot) * minLength;
             float minY = (float) -Math.cos(minRot) * minLength;
@@ -289,19 +288,6 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
             float hrX = (float) Math.sin(hrRot) * hrLength;
             float hrY = (float) -Math.cos(hrRot) * hrLength;
             canvas.drawLine(centerX, centerY, centerX + hrX, centerY + hrY, mHourPaint);
-
-            if (!isInAmbientMode()) {
-                float secX = (float) Math.sin(secRot) * secLength;
-                float secY = (float) -Math.cos(secRot) * secLength;
-                canvas.drawLine(centerX, centerY, centerX + secX, centerY + secY, mSecondPaint);
-
-                float secXback = (float) Math.sin(Math.PI + secRot) * secLength * 0.25f;
-                float secYback = (float) -Math.cos(Math.PI + secRot) * secLength * 0.25f;
-                canvas.drawLine(centerX, centerY, centerX + secXback, centerY + secYback, mSecondPaint);
-
-                canvas.drawCircle(centerX, centerY, 6f, mSecondPaint);
-                canvas.drawCircle(centerX, centerY, 4f, mCenterCapPaint);
-            }
         }
 
         @Override
@@ -332,7 +318,7 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
             }
             mRegisteredTimeZoneReceiver = true;
             IntentFilter filter = new IntentFilter(Intent.ACTION_TIMEZONE_CHANGED);
-            AnalogWatchFaceServiceUpdated.this.registerReceiver(mTimeZoneReceiver, filter);
+            AnalogWatchFaceService.this.registerReceiver(mTimeZoneReceiver, filter);
         }
 
         private void unregisterReceiver() {
@@ -340,7 +326,7 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
                 return;
             }
             mRegisteredTimeZoneReceiver = false;
-            AnalogWatchFaceServiceUpdated.this.unregisterReceiver(mTimeZoneReceiver);
+            AnalogWatchFaceService.this.unregisterReceiver(mTimeZoneReceiver);
         }
 
         /**
@@ -365,19 +351,5 @@ public class AnalogWatchFaceServiceUpdated extends CanvasWatchFaceService {
             return isVisible() && !isInAmbientMode();
         }
 
-        /**
-         * Updates the minute offset at a given hardcoded interval in time
-         *
-         * @param newMinute
-         */
-        private void updateOffsetEveryInterval(int newMinute, int interval) {
-            if ((newMinute - mTime.getOffsetInMinutes()) % interval == 0) {
-                mTime.updateOffset(newMinute - mTime.getOffsetInMinutes());
-                Log.d(TAG, "Offset updated to " + mTime.getOffsetInMinutes());
-            }
-        }
-
     }
-
-
 }

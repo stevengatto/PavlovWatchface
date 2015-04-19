@@ -15,9 +15,6 @@
 -->
 <resources>
     <string name="app_name">Pavlov\'s WatchFace</string>
-    <string name="tilt_name">Pavlov - Tilt</string>
-    <string name="analog_name">Pavlov - Analog</string>
-    <string name="sweep_name">Pavlov - Sweep</string>
     <string name="analog_name_updated">Pavlov\'s WatchFace</string>
 
     <string name="card_bounds_name">Sample Card Bounds</string>
